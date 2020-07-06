@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.io.FilenameUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -28,6 +29,18 @@ public class FileUtils {
 			}
 		}
 		return newDirectory;
+	}
+	
+	public static File copyFile(String directory, String originalFilePath, String newFileName) {
+		File originalFile = new File(originalFilePath);
+		File newFile = new File(directory+"\\"+newFileName+"."+FilenameUtils.getExtension(originalFilePath));
+		try {
+			org.apache.commons.io.FileUtils.copyFile(originalFile, newFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return newFile;
 	}
 	
 	public static void deleteDirectory(String path) {
